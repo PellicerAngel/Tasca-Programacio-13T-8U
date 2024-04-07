@@ -1,0 +1,96 @@
+import Teclat.Teclat;
+import java.util.ArrayList;
+
+class Data {
+    int dia;
+    int mes;
+    int any;
+
+    @Override
+    public String toString() {
+        return dia + "/" + mes + "/" + any ;
+    }
+    
+    
+    
+    
+    
+}
+
+class Temps{
+    int hores;
+    int minuts;
+
+    @Override
+    public String toString() {
+        return  hores + ":" + minuts ;
+    }
+    
+    
+    
+    
+}
+
+class Feina {
+    String nom;
+    Data data = new Data();
+    Temps temps = new Temps();
+
+    @Override
+    public String toString() {
+        return "\t - " + nom + " " + data + " " + temps + '}';
+                
+    }
+    
+    
+}
+/**
+ *
+ * @author marc
+ */public class T08E13 {
+
+    public static void main(String[] args) {
+        ArrayList <Feina> feines = new ArrayList<>();
+        boolean eixir = false;
+        do {
+            int opcio = Teclat.lligOpcio("TALLER", "Afegir feina", "Llistar feines");
+            switch (opcio){
+                case 1 -> {
+                    Feina f = new Feina ();
+                    f.nom = Teclat.lligString("Nom treballador ");
+                    f.data.dia = Teclat.lligInt("Dia");
+                    f.data.mes = Teclat.lligInt("Mes");
+                    f.data.any = Teclat.lligInt("Any");
+                    f.temps.hores = Teclat.lligInt("Hores");
+                    f.temps.minuts = Teclat.lligInt("Minuts");
+                    
+                    feines.add(f);
+                }
+                case 2 -> {               
+                    String nomTreBuscar = Teclat.lligString("Nom treb");
+                    
+                    float impTotal = 0;
+                    for (Feina feina : feines) {
+                        if (nomTreBuscar.equals(feina.nom)){
+                            float imp = (feina.temps.hores * 40) + (feina.temps.minuts/60) * 40;
+                            System.out.println(feina + " Import:" + imp);
+                            impTotal += imp;
+                        }
+                        
+                    }
+                    
+                    System.out.println("Import total del treb: " + impTotal);
+                    
+                    
+                    
+                
+                
+                
+                }
+                default -> {
+                    eixir = true;
+                }
+            }
+        } while (eixir == false);
+        }
+}
